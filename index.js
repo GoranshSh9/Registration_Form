@@ -11,10 +11,7 @@ const port = process.env.Port || 3000;
 const username = process.env.MONGODB_USERNAME;
 const password = process.env.MONGODB_PASSWORD;
 
-mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.ss1csj5.mongodb.net/registrationFormDB`, {
-    useNewUrlParser : true,
-    useUnifiedTopoloy : true,
-});
+mongoose.connect(`mongodb+srv://goranshsharma9:0aPSJVscVe47InQr@cluster0.ss1csj5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`);
 
 const registrationSchema = new mongoose.Schema({
     name : String,
@@ -28,7 +25,7 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(__dirname+"/pages/index.html");
 })
 
 app.post("/register", async (req, res) =>{
@@ -43,13 +40,13 @@ app.post("/register", async (req, res) =>{
                 password,
             });            
         await registrationData.save();
-        res.redirect("/success");
+        res.redirect("success.html");
         }
         else {
         alert("User already exist");
-        res.redirect("/error");
+        res.redirect("error.html");
         }
-        
+
         } catch (error){
         console.log(error);
         res.redirect("error");
@@ -57,11 +54,11 @@ app.post("/register", async (req, res) =>{
 });
 
 app.get("/success", (req, res)=>{
-    res.sendFile(__dirname+"success.html");
+    res.sendFile(__dirname+"/pages/success.html");
 })
 
 app.get("/error", (req, res)=>{
-    res.sendFile(__dirname+"error.html");
+    res.sendFile(__dirname+"/pages/error.html");
 })
 
 app.listen(port, ()=>{
