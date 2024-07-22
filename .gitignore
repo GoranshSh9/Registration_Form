@@ -1,2 +1,4 @@
 
 Registration_Form.code-workspace
+.env
+node_modules
