@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 })
 
-app.post("/register", async (req, res) => {
+app.post("/register", async (req, res) =>{
     try {
         const {name, email, password} = req.body;
 
@@ -44,21 +44,24 @@ app.post("/register", async (req, res) => {
             });            
         await registrationData.save();
         res.redirect("/success");
-    } else {
+        }
+        else {
         alert("User already exist");
         res.redirect("/error");
-    } catch (error) {
+        }
+        
+        } catch (error){
         console.log(error);
         res.redirect("error");
-    }
-        });
+        }
+});
 
 app.get("/success", (req, res)=>{
-    res.sendFile(__dirname+"/success.html");
+    res.sendFile(__dirname+"success.html");
 })
 
 app.get("/error", (req, res)=>{
-    res.sendFile(__dirname+"/error.html");
+    res.sendFile(__dirname+"error.html");
 })
 
 app.listen(port, ()=>{
