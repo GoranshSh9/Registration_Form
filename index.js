@@ -11,7 +11,7 @@ const port = process.env.Port || 3000;
 const username = process.env.MONGODB_USERNAME;
 const password = process.env.MONGODB_PASSWORD;
 
-mongoose.connect(`mongodb+srv://goranshsharma9:0aPSJVscVe47InQr@cluster0.ss1csj5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`);
+mongoose.connect('mongodb+srv://goranshsharma9:0aPSJVscVe47InQr@cluster0.ss1csj5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
 
 const registrationSchema = new mongoose.Schema({
     name : String,
@@ -40,11 +40,11 @@ app.post("/register", async (req, res) =>{
                 password,
             });            
         await registrationData.save();
-        res.redirect("success.html");
+        res.redirect("/success");
         }
         else {
         alert("User already exist");
-        res.redirect("error.html");
+        res.redirect("/error");
         }
 
         } catch (error){
